@@ -1,0 +1,33 @@
+### GET ALL PRODUCTS
+GET http://localhost:8080/products HTTP/1.1
+Content-Type: application/json
+
+### CREATE ONE PRODUCT
+POST http://localhost:8080/products HTTP/1.1
+Content-Type: application/json
+{
+    "name": "Nintendo Switch",
+    "image": "https://m.media-amazon.com/images/I/61-PblYntsL.jpg",
+    "price": 300,
+    "description": "Consola de videojuegos Nintendo",
+    "category": "Tecnología"
+}
+
+### GET ONE PRODUCT BY ID
+GET http://localhost:8080/products/633cb6ec5aefb559f78954bf HTTP/1.1
+Content-Type: application/json
+
+### DELETE ONE PRODUCT BY ID
+DELETE http://localhost:8080/products/633cbe98064abbf1e60d9bfa HTTP/1.1
+Content-Type: application/json
+
+### UPDATE ONE PRODUCT BY ID
+PATCH http://localhost:8080/products/633cb6ec5aefb559f78954bf HTTP/1.1
+Content-Type: application/json
+{
+    "price": 300
+}
+
+### GET PRODUCTS BY CATEGORY
+GET http://localhost:8080/products/category/Tecnología HTTP/1.1
+Content-Type: application/json
