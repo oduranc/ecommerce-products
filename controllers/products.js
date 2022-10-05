@@ -8,7 +8,12 @@ export const getProducts = (req, res) => {
 };
 
 export const createProduct = (req, res) => {
-  const product = productSchema(req.body);
+  var product = new productSchema();
+  product.name = req.body.name;
+  product.price = req.body.price;
+  product.description = req.body.description;
+  product.category = req.body.category;
+  product.image = req.file.filename;
   product
     .save()
     .then((data) => res.json(data))

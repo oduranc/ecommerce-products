@@ -7,12 +7,13 @@ import {
   updateProduct,
   getProductsByCategory,
 } from "../controllers/products.js";
+import { upload } from "../controllers/images.js";
 
 const router = express.Router();
 
 router.get("/", getProducts);
 
-router.post("/", createProduct);
+router.post("/", upload.single("image"), createProduct);
 
 router.get("/:id", getProductById);
 
