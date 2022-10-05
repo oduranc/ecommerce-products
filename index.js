@@ -20,10 +20,10 @@ const swaggerSpec = {
     },
     servers: [
       {
-        url: "http://localhost:8080",
+        url: "https://boiling-island-39133.herokuapp.com",
       },
       {
-        url: "https://boiling-island-39133.herokuapp.com",
+        url: "http://localhost:8080",
       },
     ],
   },
