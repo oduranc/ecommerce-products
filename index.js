@@ -31,13 +31,12 @@ const swaggerSpec = {
 };
 
 app.use(express.json());
-
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
-
+app.use("/uploads", express.static("uploads"));
 app.use("/products", productsRoutes);
 app.use("/api", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 

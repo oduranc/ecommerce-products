@@ -1,4 +1,5 @@
 import productSchema from "../models/product.js";
+import Stripe from "stripe";
 
 export const getProducts = (req, res) => {
   productSchema
@@ -7,17 +8,30 @@ export const getProducts = (req, res) => {
     .catch((error) => res.json({ message: error }));
 };
 
-export const createProduct = (req, res) => {
+export const createProduct = async (req, res) => {
   var product = new productSchema();
   product.name = req.body.name;
   product.price = req.body.price;
   product.description = req.body.description;
   product.category = req.body.category;
-  product.image = req.file.filename;
+  product.image = `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`;
   product
     .save()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
+
+  const stripe = new Stripe(process.env.STRIPE_APIKEY);
+
+  const stripeProduct = await stripe.products.create({
+    name: req.body.name,
+    default_price_data: {
+      currency: "USD",
+      unit_amount_decimal: req.body.price,
+    },
+    images: [
+      `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`,
+    ],
+  });
 };
 
 export const getProductById = (req, res) => {
