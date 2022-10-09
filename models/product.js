@@ -21,6 +21,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  priceKey: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Product", productSchema);

@@ -11,17 +11,6 @@ export const getProducts = (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  var product = new productSchema();
-  product.name = req.body.name;
-  product.price = req.body.price;
-  product.description = req.body.description;
-  product.category = req.body.category;
-  product.image = `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`;
-  product
-    .save()
-    .then((data) => res.json(data))
-    .catch((error) => res.json({ message: error }));
-
   const stripe = new Stripe(process.env.STRIPE_APIKEY);
 
   const stripeProduct = await stripe.products.create({
@@ -34,6 +23,18 @@ export const createProduct = async (req, res) => {
       `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`,
     ],
   });
+
+  var product = new productSchema();
+  product.name = req.body.name;
+  product.price = req.body.price;
+  product.description = req.body.description;
+  product.category = req.body.category;
+  product.image = `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`;
+  product.priceKey = stripeProduct.default_price;
+  product
+    .save()
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message: error }));
 };
 
 export const getProductById = (req, res) => {
