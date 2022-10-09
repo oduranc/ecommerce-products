@@ -1,5 +1,6 @@
 import productSchema from "../models/product.js";
 import Stripe from "stripe";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
