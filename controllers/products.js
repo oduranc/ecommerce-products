@@ -20,9 +20,7 @@ export const createProduct = async (req, res) => {
       currency: "USD",
       unit_amount_decimal: req.body.price * 100,
     },
-    images: [
-      `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`,
-    ],
+    images: [req.file.path],
   });
 
   var product = new productSchema();
@@ -30,7 +28,7 @@ export const createProduct = async (req, res) => {
   product.price = req.body.price;
   product.description = req.body.description;
   product.category = req.body.category;
-  product.image = `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`;
+  product.image = req.file.path;
   product.priceKey = stripeProduct.default_price;
   product
     .save()

@@ -1,11 +1,9 @@
-import mongoose from "mongoose";
-
-const imageSchema = mongoose.Schema({
-  name: {
+const images = mongoose.Schema({
+  path: {
     type: String,
     required: true,
   },
-  image: {
+  filename: {
     data: Buffer,
     contentType: String,
   },
