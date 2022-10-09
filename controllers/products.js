@@ -1,6 +1,8 @@
 import productSchema from "../models/product.js";
 import Stripe from "stripe";
 
+dotenv.config();
+
 export const getProducts = (req, res) => {
   productSchema
     .find()
@@ -26,7 +28,7 @@ export const createProduct = async (req, res) => {
     name: req.body.name,
     default_price_data: {
       currency: "USD",
-      unit_amount_decimal: req.body.price,
+      unit_amount_decimal: req.body.price * 100,
     },
     images: [
       `https://boiling-island-39133.herokuapp.com/uploads/${req.file.filename}`,
